@@ -1,8 +1,19 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import { getAllPosts } from '../lib/api'
 
-export default function Home() {
+export const getStaticProps = async () => {
+  const allPosts = await getAllPosts()
+  console.log(allPosts);
+  return {
+    props: {
+      allPosts
+    }
+  }
+}
+
+export default function Home({ allPosts: { edges } }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -18,6 +29,16 @@ export default function Home() {
           <a>blog articles page</a>
           </Link>
         </p>
+        {
+          edges.map(({ node }) => (
+            <div key={node.id}>
+              <div>
+                <h2>{node.title}</h2>
+                <p>{node.extraPostInfo.authorExcerpt}</p>
+              </div>
+            </div>
+          ))
+        }
       </main>
 
       <footer className={styles.footer}>
