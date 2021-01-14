@@ -2,8 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import { getAllPosts } from '../../lib/api'
 
-// { allPosts: { edges } }
-const Blog = () => (
+const Blog = ({ allPosts: { edges } }) => (
   <div className={styles.container}>
     <Head>
       <title>Blog articles page</title>
@@ -13,7 +12,7 @@ const Blog = () => (
       <h1 className={styles.title}>Latest blog articles</h1>
       <hr/>
       <section>
-        {/* {
+        {
           edges.map(({ node }) => (
             <div key={node.id}>
               <div>
@@ -22,19 +21,19 @@ const Blog = () => (
               </div>
             </div>
           ))
-        } */}
+        }
       </section>
     </main>
   </div>
 )
 
-// export const getStaticProps = async () => {
-//   const allPosts = await getAllPosts()
-//   return {
-//     props: {
-//       allPosts
-//     }
-//   }
-// }
+export const getServerSideProps = async () => {
+  const allPosts = await getAllPosts()
+  return {
+    props: {
+      allPosts
+    }
+  }
+}
 
 export default Blog
