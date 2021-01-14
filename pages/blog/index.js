@@ -17,7 +17,7 @@ const Blog = ({ allPosts: { edges } }) => (
             <div key={node.id}>
               <div>
                 <h2>{node.title}</h2>
-                <p>{node.extraPostInfo.authorExcerpt}</p>
+                {/* <p>{node.extraPostInfo.authorExcerpt}</p> */}
               </div>
             </div>
           ))
@@ -27,7 +27,7 @@ const Blog = ({ allPosts: { edges } }) => (
   </div>
 )
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const allPosts = await getAllPosts()
   return {
     props: {
