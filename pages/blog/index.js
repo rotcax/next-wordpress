@@ -27,10 +27,12 @@ const Blog = ({ allPosts: { edges } }) => (
   </div>
 )
 
-Blog.getInitialProps = async () => {
+export const getStaticProps = async () => {
   const allPosts = await getAllPosts()
   return {
-    allPosts
+    props: {
+      allPosts
+    }
   }
 }
 
