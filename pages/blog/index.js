@@ -27,12 +27,10 @@ const Blog = ({ allPosts: { edges } }) => (
   </div>
 )
 
-export const getServerSideProps = async () => {
+Blog.getInitialProps = async () => {
   const allPosts = await getAllPosts()
   return {
-    props: {
-      allPosts
-    }
+    allPosts
   }
 }
 
